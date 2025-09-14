@@ -89,11 +89,17 @@ function App() {
        <header className="dashboard-header">
       <h1 className="dashboard-title">NBA Stats Dashboard</h1>
       <div className ="Search-container">
-      <input type="text" placeholder="Search players..." value={searchTerm} className ="search-bar" onChange={handleInputChange} />
+      <input type="text" placeholder="Search players..." value={searchTerm} className ="search-bar" 
+        onChange={handleInputChange}
+        onKeyDown={(e) => {
+          if(e.key === 'Enter' && !loading) {
+            searchPlayers();
+          }
+        }} />
       <button className="search-button" onClick={searchPlayers} disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
       </div>
       </header>
-      <div className ="player-card">
+      <div className ="players-container">
       {players.map(player =>  (
         <div key={player.id} className="player-card">
           <h2>{player.first_name} {player.last_name}</h2>
