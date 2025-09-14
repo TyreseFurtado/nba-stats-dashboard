@@ -19,6 +19,13 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+
+  const handlePlayerClick = (player) => {
+    setSidebarOpen(true);
+    setSelectedPlayer(player);
+  }
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -101,7 +108,7 @@ function App() {
       </header>
       <div className ="players-container">
       {players.map(player =>  (
-        <div key={player.id} className="player-card">
+        <div key={player.id} className="player-card" onClick={() => handlePlayerClick(player)}>
           <h2>{player.first_name} {player.last_name}</h2>
           <p><strong>Team:</strong> {player.team.full_name}</p>
           <p><strong>Position:</strong> {player.position || 'N/A'}</p>
@@ -115,7 +122,89 @@ function App() {
 
       
       </div>
-      
+
+      <div className ={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+        <div className="sidebar-content">
+          <button className="close-button" onClick={() => setSidebarOpen(false)}>Close</button>
+
+          {selectedPlayer && (
+            <div className ="player-details">
+              <h2>{selectedPlayer.first_name} {selectedPlayer.last_name}</h2>
+              
+              <div className="detail-section">
+                <h3>Basic Information</h3>
+                <div className="detail-grid">
+                  <div className="detail-item">
+                    <span className="label">Position:</span>
+                    <span className="value">{selectedPlayer.position || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Jersey No:</span>
+                    <span className="value">{selectedPlayer.jersey_number || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Height:</span>
+                    <span className="value">{selectedPlayer.height || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Weight:</span>
+                    <span className="value">{selectedPlayer.weight || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="detail-section">
+                <h3>Team Information</h3>
+                <div className="detail-grid">
+                  <div className="detail-item">
+                    <span className="label">Team:</span>
+                    <span className="value">{selectedPlayer.team.full_name}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Conference:</span>
+                    <span className="value">{selectedPlayer.team.conference}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Division:</span>
+                    <span className="value">{selectedPlayer.team.division}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="detail-section">
+                <h3>Career Information</h3>
+                <div className="detail-grid">
+                  <div className="detail-item">
+                    <span className="label">College:</span>
+                    <span className="value">{selectedPlayer.college || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Country:</span>
+                    <span className="value">{selectedPlayer.country || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Draft Year:</span>
+                    <span className="value">{selectedPlayer.draft_year || 'Undrafted'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Draft Round:</span>
+                    <span className="value">{selectedPlayer.draft_round || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="label">Draft Pick:</span>
+                    <span className="value">{selectedPlayer.draft_number || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+            </div>
+
+          
+          
+      </div>
+
+      {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}></div>}
     </div>
    
   )
