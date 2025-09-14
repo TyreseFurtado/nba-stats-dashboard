@@ -1,0 +1,27 @@
+body {
+  background: black;
+}
+
+.dashboard-title {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.Search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 10px;
+}
+
+.player-card {
+  color: white;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
