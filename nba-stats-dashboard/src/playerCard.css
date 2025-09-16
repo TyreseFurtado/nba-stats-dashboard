@@ -1,0 +1,10 @@
+.player-card {
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 350px;
+    min-width: 300px;
+    background-color: #f9f9f9;
+    flex: 0 1 calc(33.333% - 1rem);
+  }

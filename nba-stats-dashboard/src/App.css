@@ -2,11 +2,36 @@ body {
   background: white;
 }
 
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
 .dashboard-title {
   color: black;
-  text-align: center;
-  font-size: 2rem;
-  margin: 1rem 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header-actions{
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.header-link {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.header-link:hover {
+  text-decoration: underline;
 }
 
 .Search-container {
@@ -51,16 +76,7 @@ body {
   padding: 0 2rem;
 }
 
-.player-card {
-  color: black;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  max-width: 350px;
-  min-width: 300px;
-  background-color: #f9f9f9;
-  flex: 0 1 calc(33.333% - 1rem);
-}
+
 
 .player-card h2 {
   margin-top: 0;
@@ -184,4 +200,18 @@ body {
   .sidebar.open {
     right: 0;
   }
+}
+
+.favourite-symbol {
+  color: black;
+  font-size: 1.5rem;
+}
+
+.favourite-symbol:hover {
+  color: gold;
+  cursor: pointer;
+}
+
+.favourite-symbol.favourited {
+  color: gold;
 }

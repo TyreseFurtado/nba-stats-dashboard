@@ -1,10 +1,14 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios'
+import { FaStar } from 'react-icons/fa'
+import PlayerCard from './playerCard.jsx'
+import {Link} from 'react-router-dom'
 
-function App() {
+function App({ favouritePlayers, onFavouriteToggle}) {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const api = axios.create({
@@ -14,6 +18,7 @@ function App() {
     },
     timeout: 10000,
   });
+
 
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -31,6 +36,16 @@ function App() {
     setSearchTerm(e.target.value);
     setError(null);
   }
+
+  const handleFavouriteClick = (player) => {
+    onFavouriteToggle(player);
+
+  }
+
+  const isFavourited = selectedPlayer ? favouritePlayers.some(
+    fav => fav.id === selectedPlayer.id) : false;
+  
+
 
 
   api.interceptors.response.use(
@@ -95,6 +110,11 @@ function App() {
     <div>
        <header className="dashboard-header">
       <h1 className="dashboard-title">NBA Stats Dashboard</h1>
+      <div className="header-actions">
+      <Link to="/favourites" className="header-link">Favourites</Link>
+      <span className="header-link">Compare</span>
+      </div>
+      </header>
       <div className ="Search-container">
       <input type="text" placeholder="Search players..." value={searchTerm} className ="search-bar" 
         onChange={handleInputChange}
@@ -105,16 +125,14 @@ function App() {
         }} />
       <button className="search-button" onClick={searchPlayers} disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
       </div>
-      </header>
       <div className ="players-container">
       {players.map(player =>  (
-        <div key={player.id} className="player-card" onClick={() => handlePlayerClick(player)}>
-          <h2>{player.first_name} {player.last_name}</h2>
-          <p><strong>Team:</strong> {player.team.full_name}</p>
-          <p><strong>Position:</strong> {player.position || 'N/A'}</p>
-          <p><strong>Height:</strong> {player.height}</p>
-          <p><strong>Weight:</strong> {player.weight}</p>
-        </div>
+        <PlayerCard
+        key={player.id}
+        player={player}
+        onClick={handlePlayerClick}
+
+        />
       ))}
       {error && <p className="error-message">{error}</p>}
       {loading && <p>Loading...</p>}
@@ -130,6 +148,7 @@ function App() {
           {selectedPlayer && (
             <div className ="player-details">
               <h2>{selectedPlayer.first_name} {selectedPlayer.last_name}</h2>
+              <FaStar className={`favourite-symbol ${isFavourited ? 'favourited' : ''}`}  onClick={() => handleFavouriteClick(selectedPlayer)}/>
               
               <div className="detail-section">
                 <h3>Basic Information</h3>
