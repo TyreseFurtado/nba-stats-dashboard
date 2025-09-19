@@ -7,6 +7,7 @@ import axios from 'axios'
 import { FaStar } from 'react-icons/fa'
 import PlayerCard from './playerCard.jsx'
 import {Link} from 'react-router-dom'
+import TeamsDropdown from './TeamsDropdown.jsx'
 
 function App({ favouritePlayers, onFavouriteToggle}) {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -26,6 +27,9 @@ function App({ favouritePlayers, onFavouriteToggle}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [positionFilter, setPositionFilter] = useState('');
+  const [selectedTeam, setSelectedTeam] = useState("");
+
 
   const handlePlayerClick = (player) => {
     setSidebarOpen(true);
@@ -42,8 +46,34 @@ function App({ favouritePlayers, onFavouriteToggle}) {
 
   }
 
+  const handlePositionFilterChange = (e) => {
+    setPositionFilter(e.target.value);
+  }
+
   const isFavourited = selectedPlayer ? favouritePlayers.some(
     fav => fav.id === selectedPlayer.id) : false;
+
+  
+  const filteredPlayers = players.filter(player => {
+    let passesPosition = true;
+    let passesTeam = true;
+    
+    if (positionFilter){
+      const playerPosition = player.position || '';
+      if(playerPosition.includes('-')){
+        const positions = playerPosition.split('-');
+        passesPosition = positions.includes(positionFilter);
+      } else {
+        passesPosition = player.position === positionFilter;
+      }
+    }
+    
+    if(selectedTeam) {
+      passesTeam = player.team.id.toString() === selectedTeam;
+    }
+
+    return passesPosition && passesTeam;
+  });
   
 
 
@@ -124,9 +154,22 @@ function App({ favouritePlayers, onFavouriteToggle}) {
           }
         }} />
       <button className="search-button" onClick={searchPlayers} disabled={loading}>{loading ? 'Searching...' : 'Search'}</button>
+      <div className="filter-container">
+        <select value={positionFilter} onChange={handlePositionFilterChange}>
+          {["Any Position","G","F","C"].map(pos => (
+            <option key={pos} value={pos === "Any Position" ? "" : pos}>
+              {pos}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="team-filter">
+        <TeamsDropdown onTeamSelect={setSelectedTeam}/>
+      </div>
       </div>
       <div className ="players-container">
-      {players.map(player =>  (
+      {filteredPlayers.map(player =>  (
         <PlayerCard
         key={player.id}
         player={player}
