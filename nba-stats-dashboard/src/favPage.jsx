@@ -1,6 +1,7 @@
 import "./favPage.css";
 import PlayerCard from './playerCard';
 import './App.css'
+import Header from './Header.jsx'
 
 function FavPage({favouritePlayers, handlePlayerClick}) {
 
@@ -9,9 +10,7 @@ function FavPage({favouritePlayers, handlePlayerClick}) {
 
     return (
         <div>
-            <header className="dashboard-header">
-                <h1 className="dashboard-title">Favourite Players</h1>
-            </header>
+           <Header/>
             <div className="players-container">
                {favouritePlayers.length === 0 ? ( 
                <p> No players have been favourited yet, go favourite one!</p>

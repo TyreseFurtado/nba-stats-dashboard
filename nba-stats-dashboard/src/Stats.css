@@ -1,0 +1,12 @@
+.Stats-container{
+    display: flex;
+    height: calc(100vh - 80px);
+}
+
+.Offensive-stats, .Defensive-stats {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+

@@ -8,6 +8,7 @@ import { FaStar } from 'react-icons/fa'
 import PlayerCard from './playerCard.jsx'
 import {Link} from 'react-router-dom'
 import TeamsDropdown from './TeamsDropdown.jsx'
+import Header from './Header.jsx'
 
 function App({ favouritePlayers, onFavouriteToggle}) {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -138,13 +139,7 @@ function App({ favouritePlayers, onFavouriteToggle}) {
 
   return (
     <div>
-       <header className="dashboard-header">
-      <h1 className="dashboard-title">NBA Stats Dashboard</h1>
-      <div className="header-actions">
-      <Link to="/favourites" className="header-link">Favourites</Link>
-      <span className="header-link">Compare</span>
-      </div>
-      </header>
+      <Header/>
       <div className ="Search-container">
       <input type="text" placeholder="Search players..." value={searchTerm} className ="search-bar" 
         onChange={handleInputChange}

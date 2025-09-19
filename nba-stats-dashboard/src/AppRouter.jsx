@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import App from './App.jsx'
 import FavPage from './favPage.jsx'
+import Stats from './Stats.jsx'
 
 function AppRouter() {
     const [favouritePlayers, setFavouritePlayers] = useState(() => {
@@ -44,6 +45,12 @@ function AppRouter() {
                 element={<FavPage favouritePlayers={favouritePlayers} handlePlayerClick={handlePlayerClick}
                 />
             }
+            />
+
+            <Route
+                path="/Stats"
+                element={<Stats/>
+                }
             />
                     
         </Routes>
