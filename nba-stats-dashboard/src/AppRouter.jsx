@@ -1,8 +1,7 @@
-import {useState, useEffect} from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.jsx'
 import FavPage from './favPage.jsx'
-import Stats from './Stats.jsx'
 
 function AppRouter() {
     const [favouritePlayers, setFavouritePlayers] = useState(() => {
@@ -10,7 +9,7 @@ function AppRouter() {
         return savedFavourites ? JSON.parse(savedFavourites) : [];
     });
 
-    useEffect (() => {
+    useEffect(() => {
         localStorage.setItem('favouritePlayers', JSON.stringify(favouritePlayers));
 
     }, [favouritePlayers]);
@@ -33,27 +32,21 @@ function AppRouter() {
 
     return (
         <BrowserRouter>
-        <Routes>
-            <Route
-            path="/"
-            element={<App favouritePlayers={favouritePlayers} onFavouriteToggle={handleFavouriteToggle}
+            <Routes>
+                <Route
+                    path="/"
+                    element={<App favouritePlayers={favouritePlayers} onFavouriteToggle={handleFavouriteToggle}
+                    />
+                    }
                 />
-                }
-            />
-            <Route
-                path="/favourites"
-                element={<FavPage favouritePlayers={favouritePlayers} handlePlayerClick={handlePlayerClick}
+                <Route
+                    path="/favourites"
+                    element={<FavPage favouritePlayers={favouritePlayers} handlePlayerClick={handlePlayerClick}
+                    />
+                    }
                 />
-            }
-            />
 
-            <Route
-                path="/Stats"
-                element={<Stats/>
-                }
-            />
-                    
-        </Routes>
+            </Routes>
         </BrowserRouter>
     )
 
