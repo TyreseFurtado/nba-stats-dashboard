@@ -9,15 +9,17 @@ function AppRouter() {
         return savedFavourites ? JSON.parse(savedFavourites) : [];
     });
 
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [selectedPlayer, setSelectedPlayer] = useState(null);
+
     useEffect(() => {
         localStorage.setItem('favouritePlayers', JSON.stringify(favouritePlayers));
 
     }, [favouritePlayers]);
 
     const handlePlayerClick = (player) => {
-        //Placeholder for now
-
-        console.log('player clicked:', player)
+        setSidebarOpen(true);
+        setSelectedPlayer(player);
     }
 
     const handleFavouriteToggle = (player) => {
@@ -30,22 +32,34 @@ function AppRouter() {
         })
     }
 
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route
                     path="/"
-                    element={<App favouritePlayers={favouritePlayers} onFavouriteToggle={handleFavouriteToggle}
+                    element={<App
+                        favouritePlayers={favouritePlayers}
+                        onFavouriteToggle={handleFavouriteToggle}
+                        handlePlayerClick={handlePlayerClick}
+                        sidebarOpen={sidebarOpen}
+                        setSidebarOpen={setSidebarOpen}
+                        selectedPlayer={selectedPlayer}
                     />
                     }
                 />
                 <Route
                     path="/favourites"
-                    element={<FavPage favouritePlayers={favouritePlayers} handlePlayerClick={handlePlayerClick}
+                    element={<FavPage
+                        favouritePlayers={favouritePlayers}
+                        handlePlayerClick={handlePlayerClick}
+                        sidebarOpen={sidebarOpen}
+                        setSidebarOpen={setSidebarOpen}
+                        handleFavouriteClick={handleFavouriteToggle}
+                        selectedPlayer={selectedPlayer}
                     />
                     }
                 />
-
             </Routes>
         </BrowserRouter>
     )

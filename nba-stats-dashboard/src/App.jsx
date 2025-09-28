@@ -9,8 +9,10 @@ import PlayerCard from './playerCard.jsx'
 import { Link } from 'react-router-dom'
 import TeamsDropdown from './TeamsDropdown.jsx'
 import Header from './Header.jsx'
+import Sidebar from './Sidebar.jsx'
+import './Sidebar.css'
 
-function App({ favouritePlayers, onFavouriteToggle }) {
+function App({ favouritePlayers, onFavouriteToggle, handlePlayerClick, selectedPlayer, sidebarOpen, setSidebarOpen }) {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const api = axios.create({
@@ -21,21 +23,12 @@ function App({ favouritePlayers, onFavouriteToggle }) {
     timeout: 10000,
   });
 
-
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [positionFilter, setPositionFilter] = useState('');
   const [selectedTeam, setSelectedTeam] = useState("");
-
-
-  const handlePlayerClick = (player) => {
-    setSidebarOpen(true);
-    setSelectedPlayer(player);
-  }
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -75,9 +68,6 @@ function App({ favouritePlayers, onFavouriteToggle }) {
 
     return passesPosition && passesTeam;
   });
-
-
-
 
   api.interceptors.response.use(
     response => response,
@@ -160,11 +150,12 @@ function App({ favouritePlayers, onFavouriteToggle }) {
               </option>
             ))}
           </select>
+          <div className="team-filter">
+            <TeamsDropdown onTeamSelect={setSelectedTeam} />
+          </div>
         </div>
 
-        <div className="team-filter">
-          <TeamsDropdown onTeamSelect={setSelectedTeam} />
-        </div>
+
       </div>
       <div className="players-container">
         {filteredPlayers.map(player => (
@@ -179,96 +170,21 @@ function App({ favouritePlayers, onFavouriteToggle }) {
         {loading && <p>Loading...</p>}
         {players.length === 0 && !loading && !error && <p>No players to display. Please search for a player.</p>}
 
-
       </div>
 
-      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-content">
-          <button className="close-button" onClick={() => setSidebarOpen(false)}>Close</button>
+      <Sidebar
+        player={selectedPlayer}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        isFavourited={isFavourited}
+        onFavouriteToggle={handleFavouriteClick}
+      />
 
-          {selectedPlayer && (
-            <div className="player-details">
-              <h2>{selectedPlayer.first_name} {selectedPlayer.last_name}</h2>
-              <FaStar className={`favourite-symbol ${isFavourited ? 'favourited' : ''}`} onClick={() => handleFavouriteClick(selectedPlayer)} />
-
-              <div className="detail-section">
-                <h3>Basic Information</h3>
-                <div className="detail-grid">
-                  <div className="detail-item">
-                    <span className="label">Position:</span>
-                    <span className="value">{selectedPlayer.position || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Jersey No:</span>
-                    <span className="value">{selectedPlayer.jersey_number || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Height:</span>
-                    <span className="value">{selectedPlayer.height || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Weight:</span>
-                    <span className="value">{selectedPlayer.weight || 'N/A'}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="detail-section">
-                <h3>Team Information</h3>
-                <div className="detail-grid">
-                  <div className="detail-item">
-                    <span className="label">Team:</span>
-                    <span className="value">{selectedPlayer.team.full_name}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Conference:</span>
-                    <span className="value">{selectedPlayer.team.conference}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Division:</span>
-                    <span className="value">{selectedPlayer.team.division}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="detail-section">
-                <h3>Career Information</h3>
-                <div className="detail-grid">
-                  <div className="detail-item">
-                    <span className="label">College:</span>
-                    <span className="value">{selectedPlayer.college || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Country:</span>
-                    <span className="value">{selectedPlayer.country || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Draft Year:</span>
-                    <span className="value">{selectedPlayer.draft_year || 'Undrafted'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Draft Round:</span>
-                    <span className="value">{selectedPlayer.draft_round || 'N/A'}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">Draft Pick:</span>
-                    <span className="value">{selectedPlayer.draft_number || 'N/A'}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-
-
-      </div>
 
       {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}></div>}
     </div>
 
   )
 }
-
 
 export default App
