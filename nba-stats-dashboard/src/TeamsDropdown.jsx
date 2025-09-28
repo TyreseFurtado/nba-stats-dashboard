@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ACTIVE_TEAMS } from "./ActiveTeams";
+import ACTIVE_TEAMS from "./ActiveTeams";
 import "./TeamsDropdown.css"
 
 function TeamsDropdown({ onTeamSelect }) {

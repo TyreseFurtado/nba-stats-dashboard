@@ -10,6 +10,7 @@ function Header() {
             <div className="header-actions">
                 <Link to="/" className="header-link">Search</Link>
                 <Link to="/favourites" className="header-link">Favourites</Link>
+                <Link to="/teams" className="header-link">Teams</Link>
             </div>
         </header>
     )

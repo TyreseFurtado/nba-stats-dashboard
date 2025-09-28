@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.jsx'
 import FavPage from './favPage.jsx'
+import Teams from './teams.jsx'
 
 function AppRouter() {
     const [favouritePlayers, setFavouritePlayers] = useState(() => {
@@ -57,6 +58,15 @@ function AppRouter() {
                         setSidebarOpen={setSidebarOpen}
                         handleFavouriteClick={handleFavouriteToggle}
                         selectedPlayer={selectedPlayer}
+                    />
+                    }
+                />
+                <Route
+                    path="/teams"
+                    element={<Teams
+
+
+
                     />
                     }
                 />
