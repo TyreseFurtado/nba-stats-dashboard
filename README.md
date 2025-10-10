@@ -25,7 +25,7 @@ The NBA Stats Dashboard is a client-side single-page application (SPA) built wit
 
 As a massive NBA fan, I wanted to build a clean interface to search for active/inactive players and teams without the visual noise of other sites. I decided to build it in React to practice working with external APIs and managing application state.
 
-**Live Demo:** [https://nba-stats-dashboard-kj3l7qxz3-tyreses-projects-ef433e24.vercel.app/]
+**Live Demo:** [Click here to see the app live!](https://nba-stats-dashboard-kj3l7qxz3-tyreses-projects-ef433e24.vercel.app/)
 
 ## Challenges & What I learned
 
