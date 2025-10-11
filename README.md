@@ -95,7 +95,6 @@ Due to API paywall limitations, this project is currently scoped to display **pl
 
 * **Detailed Player Stats:** Upon upgrading API access, integrate detailed, per-game player statistics into player profiles.
 * **UI/UX Refinement:** Implement improved styling and accessibility features.
-* **Deployment:** Deploy the application using a cloud service (e.g., Vercel or Netlify) to provide a live demo link.
 
 ## Author and Contact
 
