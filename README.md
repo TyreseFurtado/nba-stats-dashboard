@@ -1,25 +1,25 @@
-# NBA Stats Dashboard
+# NBA Player Directory
 
 ---
 ## Application Screenshots
 
 <p align="center">
-  <img src="images/Screenshot1.png" alt="Screenshot of the NBA Stats Dashboard Search Page" width="800"/>
+  <img src="images/Screenshot1.png" alt="Screenshot of the NBA Player Directory Search Page" width="800"/>
   <br/>
-  <img src="images/Screenshot2.png" alt="Screenshot of the NBA Stats Dashboard Position Filter in use" width="800"/>
+  <img src="images/Screenshot2.png" alt="Screenshot of the NBA Player Directory Position Filter in use" width="800"/>
   <br/>
-  <img src="images/Screenshot3.png" alt="Screenshot of the NBA Stats Dashboard Team Filter in use" width="800"/>
+  <img src="images/Screenshot3.png" alt="Screenshot of the NBA Player Directory Team Filter in use" width="800"/>
   <br/>
-  <img src="images/Screenshot4.png" alt="Screenshot of the NBA Stats Dashboard Team player favouriting function in use. Also shows the sidebar" width="800"/>
+  <img src="images/Screenshot4.png" alt="Screenshot of the NBA Player Directory Team player favouriting function in use. Also shows the sidebar" width="800"/>
   <br/>
-  <img src="images/Screenshot5.png" alt="Screenshot of the NBA Stats Dashboard Favourited Players Page" width="800"/>
+  <img src="images/Screenshot5.png" alt="Screenshot of the NBA Player Directory Favourited Players Page" width="800"/>
   <br/>
-  <img src="images/Screenshot6.png" alt="Screenshot of the NBA Stats Dashboard Teams Page." width="800"/>
+  <img src="images/Screenshot6.png" alt="Screenshot of the NBA Player Directory Teams Page." width="800"/>
 </p>
 
 ## Project Overview
 
-The NBA Stats Dashboard is a client-side single-page application (SPA) built with **React** that allows users to seamlessly explore career information for active NBA players and teams. The application successfully integrates with the **Balldontlie API** to fetch dynamic data and uses local storage for data persistence.
+The NBA Player Directory is a client-side single-page application (SPA) built with **React** that allows users to seamlessly explore career information for active NBA players and teams. The application successfully integrates with the **Balldontlie API** to fetch dynamic data and uses local storage for data persistence.
 
 ## Motivation
 
@@ -71,7 +71,7 @@ Due to API paywall limitations, this project is currently scoped to display **pl
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/TyreseFurtado/nba-stats-dashboard]
+    git clone [https://github.com/TyreseFurtado/nba-player-directory]
     cd nba-stats-dashboard
     ```
 
